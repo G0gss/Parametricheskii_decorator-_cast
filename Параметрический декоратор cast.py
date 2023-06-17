@@ -1,19 +1,18 @@
-def cast(mtype): # объявляем функцию-декоратор "cast", которая принимает параметр "mtype"
-    def decorator(func): # объявляем вложенную функцию-декоратор `decorator`, которая принимает параметр - декорируемую функцию `func`
-        def wrapper(*args, **kwargs): # объявляет "wrapper", которая принимает любое количество позиционных и именованных аргументов
-            result = func(*args, **kwargs) # Вызываем функцию с переданными ей аргументами
+def cast(mtype): 
+    def decorator(func): 
+        def wrapper(*args, **kwargs): 
+            result = func(*args, **kwargs) 
             try:
-                return mtype(result) # Приводим результат функции к заданному типу
+                return mtype(result) 
             except ValueError:
                 return result 
-        return wrapper # возвращаем функцию, которая теперь преобразует результат функции
-    return decorator # возвращаем функцию, которая принимает декорируемую функцию и возвращает обернутую в нее функцию `wrapper`.
+        return wrapper 
+    return decorator
 
 # Таким образом, `cast` - это высокоуровневый декоратор, который принимает тип и возвращает 
 # низкоуровневый декоратор, который принимает функцию и возвращает обернутую в нее функцию.
 
 # Пример использования
-
 @cast(int)
 def add(a, b):
     return a + b
